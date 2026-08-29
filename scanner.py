@@ -20,10 +20,10 @@ def send_telegram(text):
         print("Telegram credentials missing!")
         return
     url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
-    payload = {"chat_id": CHAT_ID, "text": text, "parse_mode": "Markdown"}
+    payload = {"chat_id": CHAT_ID, "text": text}
     try:
         res = requests.post(url, json=payload, timeout=10)
-        print(f"Telegram response: {res.status_code}")
+        print(f"Telegram response: {res.status_code} - {res.text}")
     except Exception as e:
         print(f"Telegram error: {e}")
 
@@ -76,16 +76,16 @@ def run_scanner():
         coin_name = symbol.replace("USDT", "")
         
         msg = (
-            f"🚨 *NEXUS QUANT AI SIGNAL* 🚨\n\n"
-            f"🪙 *Coin:* {coin_name} / USDT\n"
-            f"📈 *Direction:* LONG (BUY)\n"
-            f"💲 *Entry Price:* ${price}\n"
-            f"🎯 *Take Profit (+3%):* ${tp}\n"
-            f"🛑 *Stop Loss (-1.5%):* ${sl}\n"
-            f"📊 *RSI Level:* {round(rsi, 1)}\n"
-            f"💰 *Max Profit ($10):* +$0.30\n"
-            f"📉 *Max Loss ($10):* -$0.15\n\n"
-            f"⚡ *Status:* All Advanced Filters Passed!"
+            f"NEXUS QUANT AI SIGNAL\n\n"
+            f"Coin: {coin_name} / USDT\n"
+            f"Direction: LONG (BUY)\n"
+            f"Entry Price: ${price}\n"
+            f"Take Profit (+3%): ${tp}\n"
+            f"Stop Loss (-1.5%): ${sl}\n"
+            f"RSI Level: {round(rsi, 1)}\n"
+            f"Max Profit ($10): +$0.30\n"
+            f"Max Loss ($10): -$0.15\n\n"
+            f"Status: All Advanced Filters Passed!"
         )
         signals_found.append(msg)
 
@@ -95,8 +95,8 @@ def run_scanner():
             send_telegram(s)
     else:
         no_trade_msg = (
-            "🔴 *STICKY DECISION BOARD*\n\n"
-            "🔴 *NO TRADE* — market filtered or choppy, waiting for safe setup."
+            "STICKY DECISION BOARD\n\n"
+            "NO TRADE — market filtered or choppy, waiting for safe setup."
         )
         send_telegram(no_trade_msg)
 
