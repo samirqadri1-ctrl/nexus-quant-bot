@@ -85,7 +85,7 @@ def run_scanner():
         )
         signals_found.append(msg)
 
-    # Send signals to Telegram
+    # Send signals or status to Telegram
     if signals_found:
         for s in signals_found[:2]:
             send_telegram(s)
