@@ -2,9 +2,9 @@ import os
 import requests
 import numpy as np
 
-# TELEGRAM CONFIG (Loaded from GitHub Secrets)
-TOKEN = os.getenv("TELEGRAM_TOKEN")
-CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+# DIRECT TELEGRAM CONFIG (No Secrets Needed)
+TOKEN = "883225995:AAHaDTkjtwP7Fns-8a17nMC3"
+CHAT_ID = "7203569246"
 
 UNIVERSE = [
     "BTCUSDT", "ETHUSDT", "SOLUSDT", "DOTUSDT",
@@ -16,9 +16,6 @@ UNIVERSE = [
 API = "https://api.binance.com"
 
 def send_telegram(text):
-    if not TOKEN or not CHAT_ID:
-        print("Telegram credentials missing!")
-        return
     url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
     payload = {"chat_id": CHAT_ID, "text": text}
     try:
